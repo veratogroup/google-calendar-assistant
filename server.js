@@ -5,6 +5,19 @@ const { google } = require('googleapis');
 const { startOfWeek, addDays } = require('date-fns');
 
 const app = express();
+
+// --- Simple API key auth middleware ---
+function requireApiKey(req, res, next) {
+  const key = req.get('X-API-Key') || (req.get('Authorization') || '').replace(/^Bearer\s+/i, '');
+  if (!key || key !== process.env.API_KEY) {
+    return res.status(401).json({ error: 'Unauthorized' });
+  }
+  next();
+}
+
+// Apply to all routes
+app.use(requireApiKey);
+
 app.use(bodyParser.json());
 
 // Google OAuth2 client
@@ -117,3 +130,4 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Calendar assistant running on port ${PORT}`);
 });
+
