@@ -1,6 +1,6 @@
 {
   "name": "google-calendar-assistant",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Secure Google Calendar assistant: read/write, availability, jobs, and Vonage voice hooks.",
   "main": "server.js",
   "scripts": {
@@ -19,6 +19,7 @@
     "jsonwebtoken": "^9.0.2"
   }
 }
+
 
 
 
